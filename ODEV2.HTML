@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Roma Rakamı Çevirici</title>
+</head>
+
+<body background="https://www.gazetebilkent.com/wp-content/uploads/2019/10/shutterstock_98484677-1.jpg">
+    <div style="width: 450px;
+height: 200px;
+padding: 20px;
+background-color: rgb(255, 255, 255);
+position: absolute;
+top: 40%;
+left: 45%;
+margin-left: -160px;
+margin-top: -70px;
+border-radius: 35px;">
+        <h1>ROMA RAKAMI ÇEVİRİCİSİ</h1>
+        <br><br>
+        <b style="color: rgb(71, 71, 71);">Çevirilecek Sayı:</b> <input 
+            style="  border-radius: 42px; border-style: inset;" type="text" id="sayicevirilecek">
+        <br><br>
+        <button style=" border-radius: 42px;  background-color: black; color: aliceblue;" type="button"
+            id="cevirmeislemi">Roma Rakamına Çevir</button>
+        <button style=" border-radius: 42px;  background-color: black; color: aliceblue;" type="button"
+            id="islemicevirme">Onluk Tabana Çevir</button>
+    </div>
+    <script>
+        document.getElementById("cevirmeislemi").onclick = function () {
+            var cevirileceksayi = document.getElementById("sayicevirilecek").value;
+            if (isNaN(cevirileceksayi)) {
+                alert("Lütfen sayı giriniz.");
+            } else {
+                if (cevirileceksayi > 3999 || cevirileceksayi < 1) {
+                    alert("1-3999 arasında bir sayı giriniz.");
+                } else {
+                    var romadansayiya = {
+                        M: 1000,
+                        CM: 900,
+                        D: 500,
+                        CD: 400,
+                        C: 100,
+                        XC: 90,
+                        L: 50,
+                        XL: 40,
+                        X: 10,
+                        IX: 9,
+                        V: 5,
+                        IV: 4,
+                        I: 1,
+
+                    };
+                    var romarakami = "";
+                    for (var blum in romadansayiya) {
+                        while (cevirileceksayi >= romadansayiya[blum]) {
+                            romarakami += blum;
+                            cevirileceksayi -= romadansayiya[blum];
+                        }
+                    }
+                    alert(romarakami)
+                }
+            }
+        }
+        document.getElementById("islemicevirme").onclick = function () {
+            var romaharflisayi = document.getElementById("sayicevirilecek").value;
+            const romanumaralistesi = ["CM", "M", "CD", "D", "XC", "C", "XL", "L", "IX", "X", "IV", "V", "I"];
+            const karsiligi = [900, 1000, 400, 500, 90, 100, 40, 50, 9, 10, 4, 5, 1];
+            let işaret = 0,
+                onluksayi = 0;
+            for (let lucuk in romanumaralistesi) {
+                işaret = romaharflisayi.indexOf(romanumaralistesi[lucuk]);
+                while (işaret != -1) {
+                    onluksayi += parseInt(karsiligi[lucuk]);
+                    romaharflisayi = romaharflisayi.replace(romanumaralistesi[lucuk], "-");
+                    işaret = romaharflisayi.indexOf(romanumaralistesi[lucuk]);
+                }
+            }
+
+            if (onluksayi > 3999) {
+                alert("Girilebilecek en büyük değer 'MMMCMXCIX' ");
+
+            } else {
+                if (onluksayi == 0)
+                    alert("Lütfen geçerli karakterler giriniz. (Roma rakamları)")
+                else
+                   alert(onluksayi);
+            }
+
+        }
+    </script>
+
+</body>
+
+</html>
